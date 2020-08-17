@@ -1,0 +1,104 @@
+grammar org.xtext.wesnoth.Wail with org.eclipse.xtext.common.Terminals
+
+generate wail "http://www.xtext.org/wesnoth/Wail"
+
+Model:
+	(elements+=Rule)*
+;	
+		
+Rule:
+	'rule' name = STRING
+	'{'
+		fragments+=Fragment*
+		goals+=Goal*
+		aggressionval=Aggression
+		cautionval=Caution
+		GroupingVal=Grouping
+		('recruit' units+=Recruitment*)?
+		'}'
+;
+
+Grouping:
+	'Grouping' 'is' groupingVal=("offensive"|"defensive"|"none")
+;
+
+Fragment:
+	condition=Conditional
+	'{'
+		defualt_cas+=Defualt_CA*
+		'}'
+;
+Conditional:
+	'when:' x+=whenRules
+;
+
+Recruitment:
+	'units' unitslist=UNITLIST ('turns' turns=COMMAINT)? ('importance' importance=INT)? ('number' number=INT)?
+;
+
+whenRules:
+	UnitEquals|AtLocation|Damage|Baseline|IDEquals
+;
+
+IDEquals:
+	'ID' 'is' unitID=STRING
+;
+
+Baseline:
+	always='always'
+;
+
+Damage:
+	'health' '-' health=INT
+;
+
+AtLocation:
+	'x:' XAxis=INT 'y:' YAxis=INT
+;
+
+UnitEquals:
+	'unit' 'is' unit = STRING
+;
+
+Goal:
+	'goal' 'is' goal= GoaLocation|ProtectLocation|ProtectLeader|ProtectUnitID|ProtectUnitType
+;
+
+ProtectLeader:
+	'protect' 'leader' 'value' 'is' locationValue=INT 'radius' 'is' protectionRadius=INT 'side' 'is' procSide=INT
+;
+
+ProtectUnitID:
+	'protect' 'unit' 'value' 'is' locationValue=INT 'radius' 'is' protectionRadius=INT 'side' 'is' procSide=INT 'ID' 'is' procID=STRING
+;
+
+ProtectUnitType:
+	'protect' 'unit' 'value' 'is' locationValue=INT 'radius' 'is' protectionRadius=INT 'side' 'is' procSide=INT 'Type' 'is' procType=STRING
+;
+
+ProtectLocation:
+	'protect' 'x' XAxis=INT 'y' YAxis=INT 'value' 'is' locValue=INT 'radius' 'is' procRad=INT
+	
+;
+
+GoaLocation:
+	'attack' 'x' XAxis=INT 'y' YAxis=INT 'value' 'is' locValue=INT 
+;
+
+Aggression:
+	'aggression' 'is' aggressionVal=DECIMAL
+;
+Caution:
+	'Caution' 'is' cautionval=DECIMAL
+;
+
+UNITLIST:(ID',')*ID;
+
+DECIMAL:INT'.'INT;
+
+COMMAINT:(INT',')*INT;
+
+Defualt_CA:
+	caType = ("movement" |"heal"| "retreat" | "combat" | "recruit" | "combat_value_targets" | "capture_villages"|"leader_to_keep")
+	('cost' cost=INT)?
+;
