@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to Wail
 
-You can use the [editor on GitHub](https://github.com/ooaa30/Wail/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Wail is a Domain Specific language for modelling the AI in the game Battle for Wesnoth.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Wail was developed for a Final Year project and uses Xtext to aid in this process.
 
 ### Markdown
 
