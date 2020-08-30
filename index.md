@@ -6,6 +6,8 @@ Wail was developed for a Final Year project and uses Xtext to aid in this proces
 
 To install the project, simply download a zip of the whole project and import the plugin found within the wailplugin file. This should then give you access to the whole of the language and associated tooling.
 
+In Wesnoth the AI works by selecting an action for each unit based on the current state of the board. This DSL allows a user to manipulate which candidate actions can be included, their possible evaluation scores, a few aspects that influence the calculation of actions ( such as aggressivness) and goals that the AI should work towards. This is then compiled directly to WML (wesnoth markup language) which can then be copied into the scenario or map of your choice.
+
 In the language all models are made up a number of rules. A rule consists of any number of Candidate actions, any number of goals, followed by an aggression value (between 0 and 1) a caution value (again between 0 and 1) and a grouping type (aggressive, defensive and none) and an optional recruitment set. 
 
 A valid example code can be found below:
