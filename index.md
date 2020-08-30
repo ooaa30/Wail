@@ -18,7 +18,7 @@ rule "test"{
 		heal
 		combat_value_targets
 	}
-	goal is x 5 y 5 value is 1
+	goal is attack x 5 y 5 value is 1
 	aggression is 0.5
 	caution is 0.3
 	grouping is none
@@ -39,3 +39,25 @@ Valid Candidate Actions include:
   combat_value_targets
   leader_to_keep
   capture_villages
+ 
+ all include an optional cost measure to define the evaluation score of the candidate action in the format cost=(cost value) an example is below
+  
+ movement cost 15000
+ 
+ Goals are in the format
+ goal is (type) value is (value) supplementary info
+ valid types are protect leader, protect unit, attack, protect
+ Protect leader requires the folliwng supplemntary info - radiius is (protection radius value) side is (side of unit to protect) ID/Type is (use ID or type and then put required info)
+ protect leader requires radius is and side is 
+ Protect Location needs x (x value) y (y value) and radius
+ attack location requires x and y
+ 
+ examples for location and leader can be found below
+ 
+ goal is protext x 5 y 7 value is 3
+ goal is protect leader value is 3 radius is 3
+ goal is protect unit value is 3 radisu is 4 side is 1 ID is "bob"
+ 
+ Examples for recruiting units can be found below. All recruit instructions conist of units, followed by a comma seperated list of unit names and optional values. The optional values are tunrs (the coma seperated list of what turns to have the recruit instruction run e.g. 1,5) importance (the importance of the recruit instruction) and number (the total number of units from the list to be recruited)
+ recruit units Swordsman,Archer turns 3,8 importance 7 number 8
+ 
